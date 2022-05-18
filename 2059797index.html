@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My weather app</title>
+</head>
+
+<body>
+    <div>
+        <h1>Presentation of Sayar Dhakal</h1>
+    </div>
+    <div class="main">
+        <div class="header">
+            <h2>Weather in Portsmouth</h2>
+            <p id="myparagraph">
+            <div class="container">
+                <div class="card">
+                    <p class="temp"></p>
+                    <p class="clouds"></p>
+                    <p class="desc"></p>
+                    <p class="temp_max"></p>
+                    <p class="temp_min"></p>
+                    <p class="feels_like"></p>
+                    <p class="humidity"></p>
+                    <p class="pressure"></p>
+                  
+                   
+                </div>
+            </div>
+            </p>
+        </div>
+
+        <script >// variables
+        var temp = document.querySelector('.temp');
+        var desc = document.querySelector('.desc');
+        var clouds = document.querySelector('.clouds');
+        var temp_max = document.querySelector('.temp_max');
+        var temp_min = document.querySelector('.temp_min');
+        var feels_like = document.querySelector('.feels_like');
+        var humidity = document.querySelector('.humidity');
+        var pressure= document.querySelector('.pressure');
+        
+        
+        
+        // Fetch Portsmouth weather data from API 
+        fetch("http://localhost/sayar/api.php?city=portsmouth")
+        // convert response strings to json objects
+            .then(response => response.json())
+            .then(data => {
+                // display whole api response in browser
+                var tempValue = data['weather_temperature'];
+                var descValue = data['weather_description'];
+                var temp_maxValue = data['temp_max'];
+                var temp_minValue = data['temp_min'];
+                var feels_likeValue = data['feels_like'];
+                var humidityValue = data['weather_wind'];
+                var pressureValue = data['pressure'];
+              
+        
+        
+        
+        // inputing the API data giving with certain forms
+                desc.innerHTML = "Desc - " + descValue;
+                temp.innerHTML = "Temp - " + tempValue;
+                temp_max.innerHTML = "Temp_max - " + temp_maxValue;
+                temp_min.innerHTML = "Temp_min - " + temp_minValue;
+                feels_like.innerHTML = "Feels_like - " + feels_likeValue;
+                humidity.innerHTML = "Humidity - " + humidityValue;
+                pressure.innerHTML = "Pressure - " + pressureValue;
+        
+             })
+            //   dispaly error in alert 
+             .catch(err => alert("Wrong city name!"));
+        
+            
+        </script>
+
+
+
+
+</body>
+
+</html>
